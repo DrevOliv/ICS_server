@@ -1,7 +1,7 @@
 # ICS_server
 
 Is a webserver that hosts ics files. 
-It hase a post endpoint to post an event 
+It has a post endpoint to post an event 
 and to add it to the ics file
 
 ## Endpoints
