@@ -1,0 +1,14 @@
+### Add a new event
+POST http://127.0.0.1:8000/add_event/
+Content-Type: application/json
+X-API-Key: ipjsdbfposjnfposjnfpow94f934fn934fun34f93n4f934fn3fj
+
+{
+  "event_name": "Meeting",
+  "start": "2024-10-10T10:00:00",
+  "duration_h": 2,
+  "description": "Team sync-up meeting"
+}
+
+### Get the ICS Calendar Feed
+GET http://127.0.0.1:8000/calendar.ics
