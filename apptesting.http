@@ -7,7 +7,8 @@ X-API-Key: ipjsdbfposjnfposjnfpow94f934fn934fun34f93n4f934fn3fj
   "event_name": "Meeting",
   "start": "2024-10-10T10:00:00",
   "duration_h": 2,
-  "description": "Team sync-up meeting"
+  "description": "Team sync-up meeting",
+  "location": "hemma"
 }
 
 ### Get the ICS Calendar Feed

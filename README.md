@@ -20,7 +20,8 @@ request body ex:
   "event_name": "Meeting",
   "start": "2024-10-10T10:00:00",
   "duration_h": 2,
-  "description": "Team sync-up meeting"
+  "description": "Team sync-up meeting", //Otional
+  "location": "Home" //Otional
 }
 
 ```

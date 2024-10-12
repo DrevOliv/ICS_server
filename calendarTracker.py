@@ -9,6 +9,7 @@ class EventRequest(BaseModel):
     start: datetime  # Expecting ISO 8601 format (e.g., 'YYYY-MM-DDTHH:MM')
     duration_h: int  # Duration in hours
     description: str = ""  # Optional event description
+    location: str = ""
 
 
 class CalendarTracker:
@@ -22,6 +23,7 @@ class CalendarTracker:
         event.begin = requested_event.start
         event.end = requested_event.start + timedelta(hours=requested_event.duration_h)
         event.description = requested_event.description
+        event.location = requested_event.location
 
         # Add the event to the calendar
         self.calendar.events.add(event)
