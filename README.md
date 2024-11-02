@@ -17,9 +17,9 @@ request body ex:
 ```json
 
 {
-  "event_name": "Meeting",
-  "start": "2024-10-10T10:00:00",
-  "duration_h": 2,
+  "event_name": "Meeting", 
+  "start": "2024-10-10T10:00:00", // python datetime
+  "duration_h": 2, // float
   "description": "Team sync-up meeting", //Otional
   "location": "Home" //Otional
 }

@@ -30,6 +30,7 @@ async def add_calendar_event(event: EventRequest, api_key: str = Depends(verify_
     try:
         # Parse the start time to ensure it's valid
         calendar_tracker.add_event(event)
+        print(event)
     except ValueError:
         raise HTTPException(status_code=400, detail="Invalid start time format. Use 'YYYY-MM-DDTHH:MM'")
 

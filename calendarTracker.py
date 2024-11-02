@@ -1,15 +1,22 @@
 from ics import Calendar, Event
 from datetime import datetime, timedelta
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 
 # Pydantic model to parse the incoming event data
 class EventRequest(BaseModel):
     event_name: str
     start: datetime  # Expecting ISO 8601 format (e.g., 'YYYY-MM-DDTHH:MM')
-    duration_h: int  # Duration in hours
+    duration_h: float  # Duration in hours
     description: str = ""  # Optional event description
     location: str = ""
+
+    @field_validator("start", mode="before")
+    def make_naive(cls, v):
+        # Strip timezone if present
+        if isinstance(v, datetime) and v.tzinfo:
+            return v.replace(tzinfo=None)
+        return v
 
 
 class CalendarTracker:
