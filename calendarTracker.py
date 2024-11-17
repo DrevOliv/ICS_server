@@ -1,6 +1,7 @@
 from ics import Calendar, Event
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pydantic import BaseModel, field_validator
+from config import utc_add
 
 
 # Pydantic model to parse the incoming event data
@@ -12,11 +13,17 @@ class EventRequest(BaseModel):
     location: str = ""
 
     @field_validator("start", mode="before")
-    def make_naive(cls, v):
-        # Strip timezone if present
-        if isinstance(v, datetime) and v.tzinfo:
-            return v.replace(tzinfo=None)
-        return v
+    def add_utc_plus_one(cls, v):
+
+        if isinstance(v, str):
+            v = datetime.fromisoformat(v)
+
+        if isinstance(v, datetime):
+            if v.tzinfo is None:
+                return v.replace(tzinfo=timezone(timedelta(hours=utc_add)))
+            return v.astimezone(timezone(timedelta(hours=utc_add)))
+
+        raise ValueError("Invalid format for 'start'. Expected ISO 8601 datetime.")
 
 
 class CalendarTracker:
