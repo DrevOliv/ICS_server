@@ -1,11 +1,10 @@
-from config import API_KEY, API_KEY_NAME
+from config import API_KEY, API_KEY_NAME, time_zone
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import APIKeyHeader
 from fastapi.responses import PlainTextResponse
 from calendarTracker import CalendarTracker, EventRequest
 
-
-calendar_tracker = CalendarTracker()
+calendar_tracker = CalendarTracker(time_zone)
 
 app = FastAPI()
 
