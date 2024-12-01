@@ -30,11 +30,12 @@ class CalendarTracker:
     def __init__(self, utc: int):
         self.calendar = Calendar()
 
+        self.timezone = pytz.timezone("Europe/Stockholm")
 
     def add_event(self, requested_event: EventRequest):
 
-        start_date = requested_event.start.replace(tzinfo=pytz.timezone("Europe/Stockholm"))
-        end_date = requested_event.start.replace(tzinfo=pytz.timezone("Europe/Stockholm")) + timedelta(hours=requested_event.duration_h)
+        start_date = self.timezone.localize(requested_event.start)
+        end_date = self.timezone.localize(requested_event.start + timedelta(hours=requested_event.duration_h))
 
         event = Event()
         event.name = requested_event.event_name
