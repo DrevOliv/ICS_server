@@ -10,4 +10,4 @@ API_KEY_NAME = "X-API-Key"  # Header name for the API key
 if API_KEY is not None:
     print("api key loaded")
 
-utc_add = 1  #for time zone UTC + 1 for europe
+utc_add = 0  #for time zone UTC + 1 for europe
