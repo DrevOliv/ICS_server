@@ -1,7 +1,6 @@
 from ics import Calendar, Event
 from datetime import datetime, timedelta, timezone
 from pydantic import BaseModel, field_validator
-import pytz
 
 
 # Pydantic model to parse the incoming event data
@@ -27,15 +26,15 @@ class EventRequest(BaseModel):
 
 
 class CalendarTracker:
-    def __init__(self, timezone: str):
+    def __init__(self, utc: int):
         self.calendar = Calendar()
 
-        self.timezone = pytz.timezone(timezone)
+        self.utc = utc
 
     def add_event(self, requested_event: EventRequest):
 
-        start_date = self.timezone.localize(requested_event.start)
-        end_date = self.timezone.localize(requested_event.start + timedelta(hours=requested_event.duration_h))
+        start_date = requested_event.start - timedelta(hours=self.utc)
+        end_date = requested_event.start + timedelta(hours=requested_event.duration_h) - timedelta(hours=self.utc)
 
         event = Event()
         event.name = requested_event.event_name
